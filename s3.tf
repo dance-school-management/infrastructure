@@ -51,8 +51,9 @@ data "aws_iam_policy_document" "public-access-read" {
 
 # connect bucket with policy
 resource "aws_s3_bucket_policy" "public-access-read" {
-  bucket = aws_s3_bucket.users-media.id
-  policy = data.aws_iam_policy_document.public-access-read.json
+  bucket     = aws_s3_bucket.users-media.id
+  policy     = data.aws_iam_policy_document.public-access-read.json
+  depends_on = [aws_s3_bucket_public_access_block.users-media]
 }
 
 # connect user with policy
